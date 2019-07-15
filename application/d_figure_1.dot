@@ -1,0 +1,18 @@
+# Figure 1 graph
+
+digraph {
+
+# overall graph settings
+graph [layout = dot, overlap = FALSE, fontname = "Arial"]
+edge [fontname = "Arial", penwidth = 2  ];
+node [shape = rectangle, fontname = "Arial"]
+
+# Nodes of importance
+hrv [label = <Autonomic<br/>Dysfunction<br/><font point-size='10'>(<I>Dyx</I>)</font>>]
+cad [label = <Obstructive CAD>]
+nvi [label = <Neuropsychological<br/>Factors>]
+
+# Edge definitions
+hrv -> cad [dir = forward, label = <   Aim 2>]
+nvi -> hrv [dir = forward, label = <   Aim 1>]
+}
