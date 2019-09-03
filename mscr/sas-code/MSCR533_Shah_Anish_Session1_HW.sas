@@ -36,7 +36,12 @@ PROC UNIVARIATE DATA = lab1_exercise;
 	INSET n mean std;
 RUN;
 
+
+
 /************************************************
+
+“The mean age in our sample of __a__ children was ___b__ years (sd ___c___ years). ___d___ of the children (___e___%) attended daycare. ___f____ children (__g_%) had sore throats. Of the children who attended daycare, ___h___ (___i___) had sore throats.”
+
 Answers from part 6:
 a: 13
 b: 2.5
@@ -48,3 +53,15 @@ g: 54
 h: 6
 i: 46
 ***********************************************/
+
+/*
+Age may be related to sore throat, but its not completely clear. A table that shows the differences by age and sore throat would be helpful in identifiying a visual pattern, however would likely prefer a simple statistical test (e.g. chi-square), however would have to consider the either confounding/interaction term of the presence in daycare.
+
+The code I would use is...
+
+PROC FREQ DATA = lab1_exercise;
+	TABLES subject age daycare sore_throat;
+	TABLES age*sore_throat / plots = freqplot;
+RUN;
+
+*/
