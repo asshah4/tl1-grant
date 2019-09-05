@@ -1,6 +1,6 @@
-/*Stupid sas doesn't know how to transpose vectors
+/*SAS doesn't know how to transpose vectors
 Nor can it save vectors of data to transpose
-Excel did it way better */
+Excel did it for me */
 DATA hw;
 	INPUT A B;
 	DATALINES;
