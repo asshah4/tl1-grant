@@ -19,10 +19,18 @@ PROC UNIVARIATE DATA = CLASS.sandwich;
 	VAR calories carb fiber protein sandwich_number sodium tfat weight;
 RUN;
 
+* Min and max weight of sammiches;
+PROC MEANS DATA = CLASS.sandwich NWAY;
+	CLASS name;
+	VAR weight;
+	OUTPUT OUT = CLASS.want
+		minid = lightest min = weight1 maxid = heaviest max=weight2
+		;
+RUN;
 
 
 /* Answers to HW paragraphs
-“The sandwiches data set contains _a__ numeric variables and _b__ character variables. In the sample of _c__ sandwiches, _d__ (_e__%) were frozen and __f_ (_g__ %) were fresh. The mean weight of the sandwiches was _h__ ozs, (sd _i__ ozs, median _j__ ozs). The lightest sandwich was the _k--name of sandwich_ , which weighed _l__ ozs. The heaviest sandwich was the _m--name of sandwich_, which weighed _n__ ozs.”
+The sandwiches data set contains _a__ numeric variables and _b__ character variables. In the sample of _c__ sandwiches, _d__ (_e__%) were frozen and __f_ (_g__ %) were fresh. The mean weight of the sandwiches was _h__ ozs, (sd _i__ ozs, median _j__ ozs). The lightest sandwich was the _k--name of sandwich_ , which weighed _l__ ozs. The heaviest sandwich was the _m--name of sandwich_, which weighed _n__ ozs.”
 
 a: 8
 b: 4
