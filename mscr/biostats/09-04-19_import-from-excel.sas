@@ -4,7 +4,7 @@ data file is sandwich excel file */
 
 *Import function;
 PROC IMPORT OUT = WORK.sandwiches
-	DATAFILE = "H:\My Documents\Github\tl1-grant\mscr\SAS-class\sandwiches_in_excel.xlsx"
+	DATAFILE = "H:\My Documents\Github\tl1-grant\mscr\biostats\sandwiches_in_excel.xlsx"
 	DBMS = EXCEL REPLACE;
 	GETNAMES = YES;
 	MIXED = YES;
@@ -31,24 +31,24 @@ PROC UNIVARIATE DATA = WORK.sandwiches;
 RUN;
 
 * Save the dataset;
-DATA "H:\My Documents\Github\tl1-grant\mscr\SAS-class\sandwich.sas7bdat";
+DATA "H:\My Documents\Github\tl1-grant\mscr\biostats\sandwich.sas7bdat";
 	SET WORK.sandwiches;
 RUN;
 
 * Identify the library location;
-LIBNAME CLASS "H:\My Documents\Github\tl1-grant\mscr\SAS-class\";
+LIBNAME CLASS "H:\My Documents\Github\tl1-grant\mscr\biostats\";
 
 * Let create an instream version of the data;
 DATA CLASS.sore_throat;
 	INPUT subject$ age daycare$ sore_throat$;
 	DATALINES;
-C 3 yes no 
-E 2 no no 
-F 3 no no 
-G 3 no no 
-A 1 yes yes 
-B 2 yes yes 
-D 4 yes yes 
+C 3 yes no
+E 2 no no
+F 3 no no
+G 3 no no
+A 1 yes yes
+B 2 yes yes
+D 4 yes yes
 H 4 no yes
 ;
 RUN;
