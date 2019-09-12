@@ -1,80 +1,33 @@
-list("A", "B", c(1,2,3,4)) -> x
-x
-x[3]
-x[[3]]
-x[[3]][3]
-y <- list("C", c(5,6,7,8), x)
-y
-y[2]
-y[2][2]
-y[[2]]
-y[[3]]
-y[[3]][1]
-y[[3]][3]
-y[[3]][[3]]
-y[[3]][[3]][1]
-y[[3]][3]
-y[[3]][3][1]
-y[[3]][3][2]
-y[[3]][[3]]
-y[[3]][[3]][3]
-rm(list=ls())
-ls()
-c("A", 1, 3)
-y
-list("A", "B", c(1,2,3,4)) -> x
-y <- list("C", c(5,6,7,8), x)
-y$1
-y
-y[[1]]
-y[1]
-y[1] <- "A"
-y
-abc <- c("A", "B", "C", "D", "E", "F", "G", "H", "I")
-abc
-length(abc)
-abc(1:3)
-abc[1:3]
-library(tidyverse)
-bind_rows(abc[1:3], abc[4:6], abc[7:9]) -> df
-abc
-abc[7:9]
-bind_rows(abc[1:3], abc[4:6]) -> df
-bind_rows(abc[1:3], abc[4:6])
-a <- abc[1:3]
-b <- abc[4:6]
-c <- abc[7:9]
-data.frame(a,b,c)
-source("0_libraries.R")
+#!/usr/bin/env Rscript
+
 # Add two numbers using "mouth" of the + function
 '+'(1,1) # Should equal 2
+
 # Write a function called add5 that adds five to a single number.
-add5 <-
-function(x) {
-x + 5
-}
+add5 <- 
+	function(x) {
+		x + 5
+	}
+
 # Write a function that takes two arguments a vector and a single number and returns the element of the vector corresponding to that number. Call it pick_n.
-pick_n <-
-function(x, y) {
-x[y]
-}
+pick_n <- 
+	function(x, y) {
+		x[y]
+	}
+
 # Write a function that computes the two values that solve  a quadratic equation of the form, ax2+bx+c=0. The values as you may recall are called roots are given by the following formula that you’ve probably not seen since high school:
 # You can compute the square root with sqrt(). R only returns the last object… how can you return “two” things at once? (Hint: use one of the data types you already know.)
 quad <-
-function(a, b, c) {
-x <- (-b + sqrt(b^2 - 4*a*c)) / (2*a)
-y <- (-b - sqrt(b^2 - 4*a*c)) / (2*a)
-c(x,y)
-}
+	function(a, b, c) {
+		x <- (-b + sqrt(b^2 - 4*a*c)) / (2*a)
+		y <- (-b - sqrt(b^2 - 4*a*c)) / (2*a)
+		c(x,y)
+	}
+
 # Try to write a function that returns a function. Here is a suggestion. Write a function that takes a single number as an argument and returns a function that adds that number to its argument. Remember you can save the output of a function like anything else. So, your function, if it were called add_factory, would work like this:
 singlefn <- function(x) {x}
-doublefn <-
-function(y) {
-2*singlefn(y)
-}
-add5(1)
-pick_n(c(1,2,3), 3)
-quad(1,2,3)
-quad(1,2,0)
-singlefn(1)
-doublefn(3)
+doublefn <- 
+	function(y) {
+		2*singlefn(y)
+	}
+
