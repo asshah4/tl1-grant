@@ -57,16 +57,18 @@ RUN;
 * Send the output data to a excel file;
 ODS EXCEL FILE = "H:\My Documents\Github\tl1-grant\mscr\biostats\overall_candy.xls";
 
-*Descriptive analysis of variables;
-PROC UNIVARIATE DATA = CLASS.candy_mod;
+* Descripive analysis by all candy;
+PROC MEANS DATA = CLASS.candy_mod STACKODSOUTPUT;
 	VAR calories_per_g total_fat_per_g sat_fat_per_g sodium_per_g carb_per_g sugar_per_g protein_per_g;
+	ODS OUTPUT SUMMARY = stacked;
+RUN;
+
+* Desc by candy type;
+PROC MEANS DATA = CLASS.candy_mod STACKODSOUTPUT;
+	CLASS candy_type;
+	VAR calories_per_g total_fat_per_g sat_fat_per_g sodium_per_g carb_per_g sugar_per_g protein_per_g;
+	ODS OUTPUT SUMMARY = stacked;
 RUN;
 
 * Print into an excell FILE;
 ODS EXCEL CLOSE;
-
-* Descripive analysis by type of candy;
-PROC UNIVARIATE DATA = CLASS.candy_mod;
-	CLASS candy_type;
-	VAR calories_per_g total_fat_per_g sat_fat_per_g sodium_per_g carb_per_g sugar_per_g protein_per_g;
-RUN;
