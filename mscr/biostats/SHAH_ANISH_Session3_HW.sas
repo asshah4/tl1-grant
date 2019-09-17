@@ -36,7 +36,7 @@ DATA WORK.candy_temp;
 	protein_per_g =  protein__g_ / serving_size__g_;
 
 	* Chocolate coding;
-	IF candy_type = "chocolate" THEN candy_type = 1;
+	IF candy_type = "Chocolate" THEN candy_type = 1;
 		ELSE candy_type = 0;
 
 RUN;
@@ -54,10 +54,16 @@ RUN;
 PROC CONTENTS DATA = CLASS.candy_mod;
 RUN;
 
-* Descriptive analysis of variables;
+* Send the output data to a excel file;
+ODS EXCEL FILE = "H:\My Documents\Github\tl1-grant\mscr\biostats\overall_candy.xls";
+
+*Descriptive analysis of variables;
 PROC UNIVARIATE DATA = CLASS.candy_mod;
 	VAR calories_per_g total_fat_per_g sat_fat_per_g sodium_per_g carb_per_g sugar_per_g protein_per_g;
 RUN;
+
+* Print into an excell FILE;
+ODS EXCEL CLOSE;
 
 * Descripive analysis by type of candy;
 PROC UNIVARIATE DATA = CLASS.candy_mod;
