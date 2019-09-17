@@ -1,4 +1,4 @@
-/* 
+/*
 Homework for SAS session 3
 Anish Shah
 09/18/19
@@ -27,13 +27,13 @@ DATA WORK.candy_temp;
 	SET CLASS.candy;
 
 	* Change all the nutrition to content per gram, instead of per serving;
-	calories_per_g = calories / serving_size_(g)
-	total_fat_per_g = 
-	sat_fat_per_g = 
-	sodium_per_g
-	carb_per_g =
-	sugar_per_g =
-	protein_per_g = 
+	calories_per_g = calories / serving_size__g_;
+	total_fat_per_g = total_fat__g_ / serving_size__g_;
+	sat_fat_per_g = saturated_fat__g_  / serving_size__g_;
+	sodium_per_g = sodium__mg_ / 1000 / serving_size__g_;
+	carb_per_g = total_carbohydrate__g_ / serving_size__g_;
+	sugar_per_g = sugars__g_ / serving_size__g_;
+	protein_per_g =  protein__g_ / serving_size__g_;
 
 	* Chocolate coding;
 	IF candy_type = "chocolate" THEN candy_type = 1;
