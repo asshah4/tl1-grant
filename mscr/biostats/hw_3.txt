@@ -1,0 +1,57 @@
+1. 
+
+Given:
+X = {0:20} ... discrete random variable
+Pr(X <= 17) = 0.2
+Pr(X <= 18) = 0.3
+Pr(X <= 19) = 0.35
+
+A. Pr(X > 19) = 1 - Pr(X <= 19) = 0.65
+B. Pr(X >= 19) = 1 - Pr(X < 19) = 0.65
+C. Pr(X < 19) = Pr(X <= 19) = 0.35
+D. Pr(18 <= X <= 19)... 
+
+Pr(A) = Pr(X > 18) = 0.7
+Pr(B) = Pr(X <= 19) = 0.35
+Pr(A n B) = Pr(A) * Pr(B) = 0.24 <-- independent events
+
+[Pr(A n B) = Pr(A) * Pr(B | A) <-- for dependent events]
+
+2. 
+
+9.8% of 18-24 year olds = left handed.. .this is binomial random variable
+
+Population = 18-24 year odls
+n = 10
+p = 0.098
+k = 2
+nCk = n! / k!(n-k)!
+P(X = k) = nCk x p^k x (1-p)^(n-k)
+
+X ~ B(10, 0.098)
+
+P(X = 2) = [10C2] x 0.098^2 x (0.902)^(8)
+nCk = 10! / 2!(8)! = 10 * 9 / 2 = 45
+
+P(X = 2) = 45 x 0.009604 x 0.43818 = 0.18
+
+3. Binomial? Why or why not?
+
+A. Probability of getting flu is 0.01 with vaccine. Number of trials is 100. Yes, this could be a binomial variable (either get the flu, or not).
+B. Population of 10. Selecting 5 kids total, but no replacement. They answer a question correctly or not is a binary, however each student has a different probability of answering the question correctly (e.g. could have studied, could have cheated, etc). Thus, the success of each trial is not the same. 
+
+4. 
+
+Probability of test of being positive for HIV is 0.005 in patients without virus.
+Population is 140 people
+Test can be positive or not, with same chance each trial
+
+A. X ~ B(140, 0.005)... justified above why this is a binomial random variable
+B. Pr(X > 0).. this means that just 1 person needs to have a positive test
+
+n = 140
+p = 0.005
+k = 1
+nCk = 140! / 1!(140-1)! = 140!/139! = 140
+
+P(X = 1) = 140 x 0.005^1 x (0.995)^(140-1) =140 x 0.005 x 0.4982 = 0.3487
