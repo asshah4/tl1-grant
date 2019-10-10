@@ -8,6 +8,7 @@ pacman::p_load(
 
 # R class
 swirl,
+adm,
 admswirl,
 devtools,
 
