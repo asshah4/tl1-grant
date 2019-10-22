@@ -108,14 +108,7 @@ Daniel
   Anal cancer+     9                       32                      41
   No anal cancer   0                       114                     114
 
-2.  Malinda: Calculate the specificity of HPV16 E6 status as predictor
-    of anal cancer.
-
-> Specificity = (TN) / (TN + FP) = 114 / (114 + 0) = 100%
->
-> PPV = TP / (TP + FP) = 9/(9+0) = 100%
-
-3.  Calculate the odds ratio from table 1. 3.B. Interpret the infinite
+2.  Calculate the odds ratio from table 1. 3.B. Interpret the infinite
     odds ratio.
 
 > \(A) OR = (9\*114)/(0\*32) = 1/0 = ERROR: Cannot divide by Zero!
