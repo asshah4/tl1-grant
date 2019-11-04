@@ -1,0 +1,142 @@
+---
+title: MSCR 530 Analysis Exercise 1
+author: Anish Shah
+date: November 13, 2019
+---
+
+```{r setup, global_options, include=FALSE}
+knitr::opts_chunk$set(
+  cache = TRUE,
+  warning = FALSE,
+  eval = TRUE,
+  echo = FALSE,
+  include = TRUE,
+  message = FALSE,
+  dpi = 600,
+  dev = "png",
+  options("scipen" = 999, "digits" = 3)
+)
+```
+
+```{r load data}
+
+# Get to correct data location, and then move back
+setwd("~/Box Sync/projects/dyx/code/")
+
+# Libraries
+source("1_libraries.R")
+
+# Data intake
+source("2_intake.R")
+
+# Data tidying
+source("3_tidy.R")
+
+# Go back to quant epi folder
+setwd("~/Box Sync/projects/tl1/mscr/quant-epi/")
+```
+
+# Assignment Objectives
+
+This analysis exercise is to use sample data (from the research study of the work of this author) to create a bivariate analysis and present this in the creation of tables.
+
+The assignment objectives are as follows:
+
+1.	Select one variable to be the primary exposure of interest. Select one variable to be the primary outcome of interest. 
+1.	Create a Table 1, which presents the distribution of the primary exposure variable by other participant characteristics in the dataset.
+•	For Table 1, the exposure variable should be a dichotomous variable (or transformed into a dichotomous variable).
+•	Table 1 should have five columns (participant characteristics, exposed, not exposed, total, p-value); the exposure variable being in the columns and the participant characteristics in the rows.
+•	There must be at least 5 participant characteristics (rows) in Table 1 including a minimum of 1 continuous variable. The primary outcome variable should also be one of the participant characteristics included as a row.
+1.	Create a Table 2, which presents the distribution of the primary outcome variable by other participant characteristics in the dataset.
+•	For Table 2, the outcome variable should be a dichotomous variable (or transformed into a dichotomous variable).
+•	Table 2 should have five columns; the outcome variable being in the columns and the participant characteristics in the rows.
+•	There must be at least 5 participant characteristics in Table 2 including a minimum of 1 continuous variable and the participant characteristics in Table 1. The primary exposure variable should also be one of the participant characteristics included as a row.
+5.	Answer questions on page 3 of this instruction document which relate to the tables and interpretation of the data. Be sure to read these questions prior to creating the tables. Answers should be typed.
+
+# Table 1
+
+```{r}
+## Using the compareGroup package
+## Demographic data and baseline characteristics
+df <- inner_join(df_twins, df_wide, by = 'patid')
+
+# Format appropriate data from numerical into categories
+# Adding labels using the Hmisc package to the variables
+tmp <- within(df, {
+  patid <- factor(patid)
+  pair <- factor(pair)
+  Age <- age
+  BMI <- bmi_number
+  Physical_Activity <- baecke_tot
+  FRS <- FRS_T
+  Depression <- beck_total
+
+  Smoking <- factor(smoking)
+  levels(Smoking) <- c("No", "Yes")
+
+  Hypertension <- factor(hptn)
+  levels(Hypertension) <- c("No", "Yes")
+
+  Diabetes <- factor(dm)
+  levels(Diabetes) <- c("No", "Yes")
+
+  Antidepressant <- factor(med_antidepr)
+  levels(Antidepressant) <- c("No", "Yes")
+  
+  Antilipidemic <- factor(med_lipid_abs)
+  levels(Antilipidemic) <- c("No", "Yes")
+  
+  Antihyperglycemic <- factor(med_diabetes_mellitus)
+  levels(Antihyperglycemic) <- c("No", "Yes")
+
+  PTSD <- factor(ptsd)
+  levels(PTSD) <- c("No", "Yes")
+
+  Abnormal_Stress <- factor(PETdiff_2)
+  levels(Abnormal_Stress) <- c("No", "Yes")
+})
+
+# Comparison group of excluded patients
+cmp <- compareGroups(Abnormal_Stress ~ Age + BMI + Smoking + Hypertension + Diabetes + PTSD + Depression + Antidepressant + Antilipidemic + Antihyperglycemic + Physical_Activity + FRS, data = as.data.frame(tmp))
+
+# Table
+cmp_tbl <- createTable(cmp, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE)
+```
+
+
+# Table 2
+
+# Table Questions
+
+Question 1. Titles
+Each table should have a descriptive title. List the titles for your Table 1 and Table 2 here:
+1A. Table 1 title:
+1B. Table 2 title
+
+Question 2. Exposure table
+2A. What was the primary exposure variable chosen for Table 1?
+2B. How many participants were in each of the two exposure categories?
+2C. How were participants who had missing values of the primary exposure handled?
+
+Question 3. Outcome table
+3A. What was the primary outcome variable chosen for Table 2?
+3B. How many participants were in each of the two outcome categories?
+3C. How were participants who had missing values of the primary outcome handled?
+
+Question 4. Continuous variable statistical testing
+4A. State a participant characteristic that was included as a continuous variable in Table 1.
+4B. What statistical test was used to compare this continuous variable across exposure categories? Justify your decision to use this statistical test.
+4C. What was the null hypothesis of the statistical test used?
+4D. Provide a correct interpretation of the p-value in one sentence.
+
+Question 5. Categorical variable statistical testing
+5A. State a participant characteristic that was included as a categorical variable in Table 2.
+5B. What statistical test was used to compare this categorical variable across outcome categories? Justify your decision to use this statistical test.
+5C. What was the null hypothesis of the statistical test used?
+5D. Provide a correct interpretation of the p-value in one sentence.
+
+Question 6. Interpretation of findings
+6A. Using one sentence, describe the association between the primary exposure and primary outcome variables chosen. Report a measure of association and 95% confidence interval for the association.
+6B. Which, if any, of the participant characteristics are likely confounding the relation between the primary exposure and outcome variables? Using one or two sentences, justify the answer with information generated in Table 1 and Table 2.
+ 
+
