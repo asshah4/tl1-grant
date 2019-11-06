@@ -55,10 +55,10 @@ The assignment objectives are as follows:
 
 # Table 1
 
-```{r}
+```{r, table 1}
 ## Using the compareGroup package
 ## Demographic data and baseline characteristics
-df <- inner_join(df_twins, df_wide, by = 'patid')
+df <- inner_join(df_twins, df_wide[df$hour == 7,], by = 'patid')
 
 # Format appropriate data from numerical into categories
 # Adding labels using the Hmisc package to the variables
@@ -92,51 +92,159 @@ tmp <- within(df, {
   PTSD <- factor(ptsd)
   levels(PTSD) <- c("No", "Yes")
 
+  Abnormal_DYX <- factor(CP)
+  levels(Abnormal_DYX) <- c("No", "Yes")
+  
   Abnormal_Stress <- factor(PETdiff_2)
   levels(Abnormal_Stress) <- c("No", "Yes")
 })
 
 # Comparison group of excluded patients
-cmp <- compareGroups(Abnormal_Stress ~ Age + BMI + Smoking + Hypertension + Diabetes + PTSD + Depression + Antidepressant + Antilipidemic + Antihyperglycemic + Physical_Activity + FRS, data = as.data.frame(tmp))
+cmp <- compareGroups(Abnormal_DYX ~ Age + BMI + Smoking + Hypertension + Diabetes + PTSD + Depression + Antidepressant + Antilipidemic + Antihyperglycemic + Physical_Activity + FRS + Abnormal_Stress, data = as.data.frame(tmp))
 
 # Table
-cmp_tbl <- createTable(cmp, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE)
-```
+cmpTableExposure <- createTable(cmp, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE)
 
+# Export to markdown
+export2md(cmpTableExposure)
+```
 
 # Table 2
 
+```{r, table 2}
+## Using the compareGroup package
+## Demographic data and baseline characteristics
+df <- inner_join(df_twins, df_wide[df$hour == 7,], by = 'patid')
+
+# Format appropriate data from numerical into categories
+# Adding labels using the Hmisc package to the variables
+tmp <- within(df, {
+  patid <- factor(patid)
+  pair <- factor(pair)
+  Age <- age
+  BMI <- bmi_number
+  Physical_Activity <- baecke_tot
+  FRS <- FRS_T
+  Depression <- beck_total
+
+  Smoking <- factor(smoking)
+  levels(Smoking) <- c("No", "Yes")
+
+  Hypertension <- factor(hptn)
+  levels(Hypertension) <- c("No", "Yes")
+
+  Diabetes <- factor(dm)
+  levels(Diabetes) <- c("No", "Yes")
+
+  Antidepressant <- factor(med_antidepr)
+  levels(Antidepressant) <- c("No", "Yes")
+  
+  Antilipidemic <- factor(med_lipid_abs)
+  levels(Antilipidemic) <- c("No", "Yes")
+  
+  Antihyperglycemic <- factor(med_diabetes_mellitus)
+  levels(Antihyperglycemic) <- c("No", "Yes")
+
+  PTSD <- factor(ptsd)
+  levels(PTSD) <- c("No", "Yes")
+
+  Abnormal_DYX <- factor(CP)
+  levels(Abnormal_DYX) <- c("No", "Yes")
+  
+  Abnormal_Stress <- factor(PETdiff_2)
+  levels(Abnormal_Stress) <- c("No", "Yes")
+})
+
+# Comparison group of excluded patients
+cmp <- compareGroups(Abnormal_Stress ~ Age + BMI + Smoking + Hypertension + Diabetes + PTSD + Depression + Antidepressant + Antilipidemic + Antihyperglycemic + Physical_Activity + FRS + DYX, data = as.data.frame(tmp))
+
+# Table
+cmpTableOutcome <- createTable(cmp, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE, show.ci = TRUE)
+
+# Export to markdown
+export2md(cmpTableOutcome)
+```
+
+
 # Table Questions
 
-Question 1. Titles
+## Question 1. Titles
+
 Each table should have a descriptive title. List the titles for your Table 1 and Table 2 here:
-1A. Table 1 title:
-1B. Table 2 title
 
-Question 2. Exposure table
+1A. Table 1 title: "Description of patient characteristics by low and normal HRV"
+1B. Table 2 title: "Between-group differences of patient characteristics by abnormal myocardial perfusion imaging"
+
+## Question 2. Exposure table
+
 2A. What was the primary exposure variable chosen for Table 1?
-2B. How many participants were in each of the two exposure categories?
-2C. How were participants who had missing values of the primary exposure handled?
+Low versus normal heart rate variability (HRV), measured by the non-linear HRV measure Dyx at the cutpoint of 2.0
 
-Question 3. Outcome table
+2B. How many participants were in each of the two exposure categories?
+Low = 216
+Normal = 38
+
+2C. How were participants who had missing values of the primary exposure handled?
+The exposure was generated through ECG analysis mulitple steps prior. They were excluded from the sample population based on missing-values, thus were excluded altogether.
+
+## Question 3. Outcome table
+
 3A. What was the primary outcome variable chosen for Table 2?
+
+Abnormal versus normal stress test, determined by myocardial perfusion imaging using adenosine stress. 
+
 3B. How many participants were in each of the two outcome categories?
+
+208 had normal stress test, while 54 had abnormal stress tests.
+
 3C. How were participants who had missing values of the primary outcome handled?
 
-Question 4. Continuous variable statistical testing
+The patients that were unable to tolerate stress tests were excluded from the study initially. The purpose of the study was obtaining stress tests, thus that data was excluded from the study onset.
+
+## Question 4. Continuous variable statistical testing
+
 4A. State a participant characteristic that was included as a continuous variable in Table 1.
+
+Age was a simple continous variable used in Table 1.
+
 4B. What statistical test was used to compare this continuous variable across exposure categories? Justify your decision to use this statistical test.
+
+We used a two-sample t-test because, although based on size alone we can suppose we have a normal distribution, the SD of population is not known, thus the sample SD has to be used. Thus, t-test.
+
 4C. What was the null hypothesis of the statistical test used?
+
+H0 = Mean age of those with normal stress tests is the same as that of those with abnormal stress tests.
+
 4D. Provide a correct interpretation of the p-value in one sentence.
 
-Question 5. Categorical variable statistical testing
+P-value of 0.397, with an alpha of 0.05, suggests that there is insufficient evidence to reject the null hypothesis.
+
+## Question 5. Categorical variable statistical testing
+
 5A. State a participant characteristic that was included as a categorical variable in Table 2.
+
+PTSD was selected as a categorical variable in this study (presence or absence by clinical chart review).
+
 5B. What statistical test was used to compare this categorical variable across outcome categories? Justify your decision to use this statistical test.
+
+Because this was a categorical variable, the chi-squared test was used. This test was appropriate since it looks for whether or not there is a significant difference between teh expected and observed frequences in multiple categories. Essentially, its testing if there is independence among the groups.
+
 5C. What was the null hypothesis of the statistical test used?
+
+H0 = There is not a diffence in the frequency of PTSD in patients with normal stress and in the frequency of PTSD in those with abnormal stress.
+
 5D. Provide a correct interpretation of the p-value in one sentence.
 
-Question 6. Interpretation of findings
-6A. Using one sentence, describe the association between the primary exposure and primary outcome variables chosen. Report a measure of association and 95% confidence interval for the association.
-6B. Which, if any, of the participant characteristics are likely confounding the relation between the primary exposure and outcome variables? Using one or two sentences, justify the answer with information generated in Table 1 and Table 2.
- 
+The p value = 0.748, with alpha = 0.05, suggesting that there is not sufficient evidence to reject the null hypothesis (and that hte two populations are not independent).
 
+## Question 6. Interpretation of findings
+
+6A. Using one sentence, describe the association between the primary exposure and primary outcome variables chosen. Report a measure of association and 95% confidence interval for the association.
+
+Abnormal/low Dyx (HRV measure) is associated with abnormal stress, via two-sample t-test (t = 2, df = 74, p = 0.04)
+
+DYX is higher in patients with normal stress (0.395) than in abnormal stress (0.0392), such that there is a difference between the means of the populations based on a two-sample t-test (95% CI 0.0191 - 0.6935, t = 2, DF = 74, p = 0.04).
+
+6B. Which, if any, of the participant characteristics are likely confounding the relation between the primary exposure and outcome variables? Using one or two sentences, justify the answer with information generated in Table 1 and Table 2.
+
+Not enough is known about autonomic dysfunction to allow us to assess for confounding. PTSD and depression effect teh ANS centrally, while HTN and age effect ANS systemically, and integration at the level of the heart leads to the HRV measure. Depression would likely be the strongest candidate to be a confounder, if anything. However, based on teh DAG model, there would not be an unblocked open path from HRV to abnormal stress test.  
