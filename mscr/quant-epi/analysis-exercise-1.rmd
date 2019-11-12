@@ -94,11 +94,7 @@ tmp <- within(df, {
 
   Abnormal_DYX <- factor(CP)
   levels(Abnormal_DYX) <- c("No", "Yes")
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 5458e64a1faf284f3a4e3e83dc8b231a68a3d951
   Abnormal_Stress <- factor(PETdiff_2)
   levels(Abnormal_Stress) <- c("No", "Yes")
 })
@@ -142,17 +138,9 @@ tmp <- within(df, {
 
   Antidepressant <- factor(med_antidepr)
   levels(Antidepressant) <- c("No", "Yes")
-<<<<<<< HEAD
   
   Antilipidemic <- factor(med_lipid_abs)
   levels(Antilipidemic) <- c("No", "Yes")
-  
-=======
-
-  Antilipidemic <- factor(med_lipid_abs)
-  levels(Antilipidemic) <- c("No", "Yes")
-
->>>>>>> 5458e64a1faf284f3a4e3e83dc8b231a68a3d951
   Antihyperglycemic <- factor(med_diabetes_mellitus)
   levels(Antihyperglycemic) <- c("No", "Yes")
 
@@ -161,11 +149,7 @@ tmp <- within(df, {
 
   Abnormal_DYX <- factor(CP)
   levels(Abnormal_DYX) <- c("No", "Yes")
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 5458e64a1faf284f3a4e3e83dc8b231a68a3d951
   Abnormal_Stress <- factor(PETdiff_2)
   levels(Abnormal_Stress) <- c("No", "Yes")
 })
@@ -206,11 +190,7 @@ The exposure was generated through ECG analysis mulitple steps prior. They were 
 
 3A. What was the primary outcome variable chosen for Table 2?
 
-<<<<<<< HEAD
 Abnormal versus normal stress test, determined by myocardial perfusion imaging using adenosine stress. 
-=======
-Abnormal versus normal stress test, determined by myocardial perfusion imaging using adenosine stress.
->>>>>>> 5458e64a1faf284f3a4e3e83dc8b231a68a3d951
 
 3B. How many participants were in each of the two outcome categories?
 
