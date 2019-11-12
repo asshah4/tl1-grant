@@ -118,7 +118,7 @@ export2md(cmpTableExposure)
 ```{r, table 2}
 ## Using the compareGroup package
 ## Demographic data and baseline characteristics
-df <- inner_join(df_twins, df_wide[df$hour == 7,], by = 'patid')
+df <- inner_join(df_twins, subset(df_wide, hour == 7), by = 'patid')
 
 # Format appropriate data from numerical into categories
 # Adding labels using the Hmisc package to the variables
