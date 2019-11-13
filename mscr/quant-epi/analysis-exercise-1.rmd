@@ -176,7 +176,7 @@ tmp <- tmp[!is.na(tmp$CP),]
 cmpOut <- compareGroups(Abnormal_Stress ~ Age + BMI + Smoking + Hypertension + Diabetes + PTSD + Depression + Antidepressant + Antilipidemic + Antihyperglycemic + Physical_Activity + FRS + Abnormal_DYX, data = as.data.frame(tmp))
 
 # Table
-cmpTableOutcome <- createTable(cmpOut, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE, show.ci = TRUE)
+cmpTableOutcome <- createTable(cmpOut, show.n = TRUE, show.ratio = FALSE, show.p.overall = TRUE)
 
 # Export to markdown
 export2md(cmpTableOutcome)
