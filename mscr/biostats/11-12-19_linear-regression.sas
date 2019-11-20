@@ -29,3 +29,14 @@ RUN;
 PROC REG CORR;
 	MODEL mass = age;
 RUN;
+
+* Regression model with confidence intervals;
+* Default is 95%, but can modify it as below;
+PROC REG CORR;
+	MODEL mass = age / CLM alpha = 0.01;
+RUN;
+
+	* Can do confidence interval for single individual observation as well;
+PROC REG CORR;
+	MODEL mass = age / CLM CLI; 
+RUN;
