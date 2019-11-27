@@ -8,9 +8,8 @@ Anish Shah
 LIBNAME H "H:\My Documents\Github\tl1\mscr\biostats\";
 
 * Import data;
-PROC IMPORT OUT = WORK.sandwich_name;
+PROC IMPORT OUT = WORK.sandwich_name 
 	DATAFILE = "H:\My Documents\Github\tl1\mscr\biostats\sandwich_name.xls";
-	DBMS = EXCEL REPLACE;
 	GETNAMES = YES;
 	MIXED = YES;
 	SCANTEXT = YES;
@@ -18,9 +17,9 @@ PROC IMPORT OUT = WORK.sandwich_name;
 	SCANTIME = YES;
 RUN;
 
-PROC IMPORT OUT = WORK.sandwich_nutrition;
+
+PROC IMPORT OUT = WORK.sandwich_nutrition
 	DATAFILE = "H:\My Documents\Github\tl1\mscr\biostats\sandwich_nutrition.xls";
-	DBMS = EXCEL REPLACE;
 	GETNAMES = YES;
 	MIXED = YES;
 	SCANTEXT = YES;
@@ -29,7 +28,7 @@ PROC IMPORT OUT = WORK.sandwich_nutrition;
 RUN;
 
 *Examine contents of data sets;
-PROC CONTENTS DATA = WORK.sandwich_name;
+PROC CONTENTS DATA = WORK.sandwich_name; RUN;
 PROC CONTENTS DATA = WORK.sandwich_nutrition;
 RUN;
 
@@ -48,6 +47,7 @@ DATA WORK.sandwiches;
 RUN;
 
 * Descriptive analysis;
+PROC UNIVARIATE DATA = WORK.sandwiches;
 	VAR Calories TFat Protein Carb Fiber Sodium Weight;
 	HISTOGRAM Calories TFat Protein Carb Fiber Sodium Weight;
 	PROBPLOT Calories TFat Protein Carb Fiber Sodium Weight;
@@ -60,10 +60,11 @@ RUN;
 * Modify teh data... change category of BEEF to Beef;
 DATA WORK.sandwiches;
 	SET WORK.sandwiches;
-
 	* Decapitate the cow;
-	IF Category == "BEEF" THEN Category = "Beef";
+	IF Category = "BEEF" THEN Category = "Beef";
+RUN;
 
+PROC CONTENTS DATA = WORK.sandwiches;
 RUN;
 
 * Test average calories different for fresh or frozen, alpha = 0.01;
